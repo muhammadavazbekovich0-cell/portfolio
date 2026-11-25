@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="uz" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary SEO -->
+  <title id="page-title">Muhammad — Senior Frontend &amp; UI/UX Developer</title>
+  <meta name="description" id="page-desc" content="Muhammad — Futuristic developer portfolio with 30 languages, separate page switching, interactive UI/UX, and live Netlify projects." />
+  <meta name="keywords" content="Muhammad, Frontend Developer, UI/UX Designer, JavaScript, HTML5, CSS3, Uzum, BMW, Samsung, BrainGame" />
+  <meta name="author" content="Muhammad" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#05070e" />
+
+  <!-- Open Graph Metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Muhammad — Futuristic Frontend &amp; UI/UX Portfolio" />
+  <meta property="og:description" content="High-craft interactive portfolio with 30-language localization, glassmorphism, and live projects." />
+  <meta property="og:locale" content="uz_UZ" />
+  <meta property="og:site_name" content="MUHAMMAD.DEV" />
+
+  <!-- Inline SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='55%25' stop-color='%233b82f6'/%3E%3Cstop offset='100%25' stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2305070e'/%3E%3Cpath d='M18 46L30 18h4l12 28h-5.2l-2.6-6.5H25.8L23.2 46H18zm9.6-10.8h8.8L32 24.4l-4.4 10.8z' fill='url(%23g)'/%3E%3C/svg%3E" />
+
+  <link rel="stylesheet" href="./INDEX.CSS" />
+</head>
+<body>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" class="scroll-progress" role="progressbar" aria-label="Scroll progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+
+  <!-- Custom Cursor (Desktop) -->
+  <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Mouse-Following Ambient Glow -->
+  <div id="mouse-glow" class="mouse-glow" aria-hidden="true"></div>
+
+  <!-- Animated Background Particles Canvas -->
+  <canvas id="particles-canvas" class="particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- Preloader -->
+  <div id="preloader" class="preloader" aria-hidden="false">
+    <div class="preloader-inner">
+      <div class="preloader-ring"></div>
+      <div class="preloader-logo">MUHAMMAD<span>.DEV</span></div>
+      <p id="preloader-text" class="preloader-status">Initializing interface...</p>
+    </div>
+  </div>
+
+  <!-- Header & Page Navigation -->
+  <header class="site-header glass-nav" id="top">
+    <div class="container nav-wrapper">
+      <a href="#hero" data-page="hero" class="brand-logo" aria-label="Home Page">
+        <span class="brand-glyph">&lt;/&gt;</span>
+        <span class="brand-name">MUHAMMAD<span class="accent-text">.DEV</span></span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary Page Navigation">
+        <ul class="nav-list">
+          <li><a href="#hero" data-page="hero" class="nav-link active" data-i18n="nav.home">Bosh sahifa</a></li>
+          <li><a href="#about" data-page="about" class="nav-link" data-i18n="nav.about">Men haqimda</a></li>
+          <li><a href="#skills" data-page="skills" class="nav-link" data-i18n="nav.skills">Ko'nikmalar</a></li>
+          <li><a href="#projects" data-page="projects" class="nav-link" data-i18n="nav.projects">Loyihalar</a></li>
+          <li><a href="#experience" data-page="experience" class="nav-link" data-i18n="nav.experience">Tajriba</a></li>
+          <li><a href="#services" data-page="services" class="nav-link" data-i18n="nav.services">Xizmatlar</a></li>
+          <li><a href="#testimonials" data-page="testimonials" class="nav-link" data-i18n="nav.testimonials">Fikrlar</a></li>
+          <li><a href="#contact" data-page="contact" class="nav-link" data-i18n="nav.contact">Aloqa</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-controls">
+        <!-- 30-Language Selector -->
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button type="button" class="lang-trigger glass-btn" id="lang-trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Select Language">
+            <span id="lang-current-flag" class="lang-flag">🇺🇿</span>
+            <span id="lang-current-code" class="lang-code">UZ</span>
+            <span class="lang-caret" aria-hidden="true">▾</span>
+          </button>
+          <div class="lang-menu glass-card" id="lang-menu" role="listbox" aria-label="30 Languages">
+            <div class="lang-search-wrap">
+              <input type="search" id="lang-search" class="lang-search" placeholder="Search 30 languages..." aria-label="Search languages" autocomplete="off" />
+            </div>
+            <div id="lang-list" class="lang-list"></div>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button type="button" id="theme-toggle" class="icon-btn glass-btn" aria-label="Toggle color theme" title="Toggle Theme">
+          <span id="theme-icon" aria-hidden="true">☀</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button type="button" id="mobile-menu-btn" class="mobile-menu-btn glass-btn" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- PAGE 1: HERO SECTION -->
+    <section id="hero" data-page-section="hero" class="hero-section section page-view active-page">
+      <div class="hero-shapes" aria-hidden="true">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-content reveal revealed">
+          <div class="status-badge glass-pill">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span data-i18n="hero.status">Loyihalar uchun ochiq • Muhammad</span>
+          </div>
+
+          <p class="hero-greeting" data-i18n="hero.greeting">Salom, men</p>
+          <h1 class="hero-title">
+            <span class="gradient-text">Muhammad</span>
+          </h1>
+
+          <div class="typing-wrapper" aria-live="polite">
+            <span class="typing-prefix" data-i18n="hero.rolePrefix">Men</span>
+            <span id="typing-text" class="typing-text"></span>
+            <span class="typing-cursor" aria-hidden="true">|</span>
+          </div>
+
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
+            Zamonaviy veb-ilovalar, yuqori aniqlikdagi UI/UX interfeyslar va tez ishlaydigan frontend arxitekturalarini yarataman.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" data-page="projects" class="btn btn-primary glow-btn">
+              <span data-i18n="hero.ctaProjects">Loyihalarni ko'rish</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <button type="button" id="open-cv-btn" class="btn btn-secondary glass-btn">
+              <span aria-hidden="true">📄</span>
+              <span data-i18n="hero.ctaCv">CV ko'rish / Yuklash</span>
+            </button>
+            <a href="#contact" data-page="contact" class="btn btn-ghost glass-btn" data-i18n="hero.ctaContact">Bog'lanish</a>
+          </div>
+
+          <div class="hero-meta-row">
+            <div class="social-links" aria-label="Social Links">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link glass-btn" aria-label="GitHub">GH</a>
+              <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-link glass-btn" aria-label="Telegram">TG</a>
+              <a href="tel:+998903816676" class="social-link glass-btn" aria-label="Call +998 90 381 66 76">TEL</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link glass-btn" aria-label="LinkedIn">IN</a>
+            </div>
+            <span class="demo-tag" data-i18n="common.demoNote">4 Live Netlify Projects</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal revealed">
+          <div class="showcase-card glass-card">
+            <div class="showcase-header">
+              <span class="showcase-badge">MUHAMMAD • DIRECT LINES</span>
+            </div>
+
+            <div class="phone-quick-list">
+              <a href="tel:+998903816676" class="phone-quick-item glass-subtle">
+                <span class="phone-label">Tel 1</span>
+                <strong dir="ltr">+998 90 381 66 76</strong>
+              </a>
+              <a href="tel:+998900036609" class="phone-quick-item glass-subtle">
+                <span class="phone-label">Tel 2</span>
+                <strong dir="ltr">+998 90 003 66 09</strong>
+              </a>
+              <a href="tel:+998905428080" class="phone-quick-item glass-subtle">
+                <span class="phone-label">Tel 3</span>
+                <strong dir="ltr">+998 90 542 80 80</strong>
+              </a>
+            </div>
+
+            <!-- Animated Developer SVG Illustration -->
+            <div class="dev-illustration-box" aria-label="Animated developer workspace illustration">
+              <svg viewBox="0 0 360 126" class="dev-svg" role="img" aria-label="Futuristic code monitor and waves">
+                <defs>
+                  <linearGradient id="svgGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00e5ff" />
+                    <stop offset="50%" stop-color="#3b82f6" />
+                    <stop offset="100%" stop-color="#a855f7" />
+                  </linearGradient>
+                </defs>
+                <rect x="20" y="14" width="320" height="92" rx="12" fill="rgba(10,16,32,0.85)" stroke="url(#svgGrad)" stroke-width="1.5" />
+                <circle cx="40" cy="30" r="4" fill="#ff5f56" />
+                <circle cx="54" cy="30" r="4" fill="#ffbd2e" />
+                <circle cx="68" cy="30" r="4" fill="#27c93f" />
+                <rect x="38" y="46" width="120" height="6" rx="3" fill="#00e5ff" opacity="0.85" class="svg-pulse" />
+                <rect x="38" y="60" width="180" height="6" rx="3" fill="#3b82f6" opacity="0.65" />
+                <rect x="38" y="74" width="140" height="6" rx="3" fill="#a855f7" opacity="0.85" />
+                <path d="M245 48 L265 62 L245 76" fill="none" stroke="#00e5ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <line x1="276" y1="76" x2="306" y2="76" stroke="#a855f7" stroke-width="3" stroke-linecap="round" class="svg-pulse" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" data-page="about" class="scroll-down-indicator" aria-label="Go to About page">
+        <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+        <span class="scroll-label" data-i18n="hero.scrollDown">Sahifaga o'tish</span>
+      </a>
+    </section>
+
+    <!-- PAGE 2: ABOUT ME SECTION -->
+    <section id="about" data-page-section="about" class="section about-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="about.eyebrow">01 / PROFIL</span>
+          <h2 class="section-title" data-i18n="about.title">Men haqimda</h2>
+          <p class="section-subtitle" data-i18n="about.subtitle">Texnologiya, estetika va foydalanuvchi tajribasi chorrahasidagi muhandislik.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-bio glass-card reveal revealed">
+            <h3 data-i18n="about.bioHeading">Biografiya va Shaxsiy Kirish</h3>
+            <p data-i18n="about.bioText">
+              Men Muhammad — veb-interfeyslar, interaktiv animatsiyalar va foydalanuvchiga qulay raqamli mahsulotlar yaratishga ixtisoslashgan dasturchiman. Har bir loyihada toza kod, tezkor yuklanish va vizual muvozanatga e'tibor qarataman.
+            </p>
+
+            <h4 data-i18n="about.journeyHeading">Dasturlashdagi yo'lim</h4>
+            <p data-i18n="about.journeyText">
+              Oddiy statik sahifalarni tahrirlashdan boshlab, murakkab interaktiv foydalanuvchi interfeyslari, dizayn tizimlari va tezlik optimallashtirishgacha bo'lgan bosqichlarni bosib o'tdim.
+            </p>
+
+            <div class="about-pillars">
+              <div class="pillar-box glass-subtle">
+                <h5 data-i18n="about.goalsTitle">Karyera maqsadlari</h5>
+                <p data-i18n="about.goalsText">Xalqaro darajadagi mahsulot jamoalarida yuqori sifatli UI/UX va frontend yechimlar yaratish.</p>
+              </div>
+              <div class="pillar-box glass-subtle">
+                <h5 data-i18n="about.qualitiesTitle">Shaxsiy fazilatlar</h5>
+                <p data-i18n="about.qualitiesText">Detallarga e'tibor, mustaqil izlanish, jamoada samarali muloqot va mas'uliyat.</p>
+              </div>
+              <div class="pillar-box glass-subtle">
+                <h5 data-i18n="about.philosophyTitle">Falsafam</h5>
+                <p data-i18n="about.philosophyText">Murakkab texnologiya foydalanuvchi uchun sodda, ravon va tabiiy ko'rinishi kerak.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-side reveal revealed">
+            <div class="stats-grid">
+              <div class="stat-card glass-card">
+                <span class="stat-number" data-target="3" data-suffix="+">0</span>
+                <span class="stat-label" data-i18n="stats.years">Yillik amaliyot (Namuna)</span>
+              </div>
+              <div class="stat-card glass-card">
+                <span class="stat-number" data-target="4" data-suffix="">0</span>
+                <span class="stat-label" data-i18n="stats.projects">Asosiy jonli loyihalar</span>
+              </div>
+              <div class="stat-card glass-card">
+                <span class="stat-number" data-target="30" data-suffix="">0</span>
+                <span class="stat-label" data-i18n="stats.languages">Qo'llab-quvvatlanuvchi til</span>
+              </div>
+              <div class="stat-card glass-card">
+                <span class="stat-number" data-target="100" data-suffix="%">0</span>
+                <span class="stat-label" data-i18n="stats.responsive">Moslashuvchan dizayn</span>
+              </div>
+            </div>
+
+            <div class="mini-timeline glass-card">
+              <h3 data-i18n="about.timelineHeading">O'rganish va yutuqlar xronologiyasi</h3>
+              <ul class="timeline-list">
+                <li>
+                  <span class="tl-badge">2023 (Demo)</span>
+                  <strong data-i18n="about.tl1Title">HTML5, CSS3 va Semantik Veb</strong>
+                  <p data-i18n="about.tl1Desc">Grid, Flexbox, CSS o'zgaruvchilari va moslashuvchan tartiblarni o'zlashtirish.</p>
+                </li>
+                <li>
+                  <span class="tl-badge">2024 (Demo)</span>
+                  <strong data-i18n="about.tl2Title">Modern JavaScript &amp; UI/UX</strong>
+                  <p data-i18n="about.tl2Desc">DOM arxitekturasi, animatsiyalar, lokalizatsiya va foydalanuvchi oqimlarini loyihalash.</p>
+                </li>
+                <li>
+                  <span class="tl-badge">2025–2026 (Demo)</span>
+                  <strong data-i18n="about.tl3Title">Performance &amp; Design Systems</strong>
+                  <p data-i18n="about.tl3Desc">Ko'p tilli interfeyslar, qulaylik standartlari va mukammal vizual tizimlar yaratish.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: ADVANCED SKILLS SECTION -->
+    <section id="skills" data-page-section="skills" class="section skills-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="skills.eyebrow">02 / TEXNOLOGIYALAR</span>
+          <h2 class="section-title" data-i18n="skills.title">Ko'nikmalar</h2>
+          <p class="section-subtitle" data-i18n="skills.note">
+            Eslatma: Quyidagi foiz ko'rsatkichlari o'zgartiriladigan namuna (demo) qiymatlaridir.
+          </p>
+        </div>
+
+        <div class="skill-filters reveal revealed" role="tablist" aria-label="Skill categories">
+          <button type="button" class="filter-btn active" data-skill-cat="all" data-i18n="skills.catAll">Barchasi</button>
+          <button type="button" class="filter-btn" data-skill-cat="core" data-i18n="skills.catCore">Core Web</button>
+          <button type="button" class="filter-btn" data-skill-cat="tools" data-i18n="skills.catTools">Workflow &amp; Git</button>
+          <button type="button" class="filter-btn" data-skill-cat="design" data-i18n="skills.catDesign">UI/UX &amp; Design</button>
+        </div>
+
+        <div id="skills-grid" class="skills-grid"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 4: PROJECT SHOWCASE SECTION -->
+    <section id="projects" data-page-section="projects" class="section projects-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="projects.eyebrow">03 / PORTFOLIO</span>
+          <h2 class="section-title" data-i18n="projects.title">Tanlangan loyihalar</h2>
+          <p class="section-subtitle" data-i18n="projects.subtitle">
+            Muhammadning 4 ta jonli loyihasi — filtrlar, Live Demo havolalari va batafsil ko'rish oynasi bilan.
+          </p>
+        </div>
+
+        <div class="project-filters reveal revealed" role="tablist" aria-label="Project categories">
+          <button type="button" class="filter-btn active" data-project-cat="All" data-i18n="projects.catAll">All</button>
+          <button type="button" class="filter-btn" data-project-cat="Websites" data-i18n="projects.catWebsites">Websites</button>
+          <button type="button" class="filter-btn" data-project-cat="Landing Pages" data-i18n="projects.catLanding">Landing Pages</button>
+          <button type="button" class="filter-btn" data-project-cat="JavaScript Apps" data-i18n="projects.catJs">JavaScript Apps</button>
+          <button type="button" class="filter-btn" data-project-cat="UI Design" data-i18n="projects.catUi">UI Design</button>
+        </div>
+
+        <div id="projects-grid" class="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 5: EXPERIENCE & EDUCATION SECTION -->
+    <section id="experience" data-page-section="experience" class="section experience-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="experience.eyebrow">04 / YO'L XARITASI</span>
+          <h2 class="section-title" data-i18n="experience.title">Tajriba va Ta'lim</h2>
+          <p class="section-subtitle" data-i18n="experience.subtitle">
+            Dasturlash yo'li, ta'lim, kurslar, sertifikatlar va tajriba (tahrirlanadigan namuna ma'lumotlar).
+          </p>
+        </div>
+
+        <div id="experience-timeline" class="exp-timeline"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 6: SERVICES SECTION -->
+    <section id="services" data-page-section="services" class="section services-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="services.eyebrow">05 / IMKONIYATLAR</span>
+          <h2 class="section-title" data-i18n="services.title">Xizmatlar</h2>
+          <p class="section-subtitle" data-i18n="services.subtitle">
+            Zamonaviy veb-yechimlar va interfeyslarni ishlab chiqish yo'nalishlari.
+          </p>
+        </div>
+
+        <div id="services-grid" class="services-grid"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 7: TESTIMONIALS + EXTRAS SECTION -->
+    <section id="testimonials" data-page-section="testimonials" class="section testimonials-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="testimonials.eyebrow">06 / FIKRLAR</span>
+          <h2 class="section-title" data-i18n="testimonials.title">Mijozlar fikrlari</h2>
+          <p class="section-subtitle" data-i18n="testimonials.demoDisclaimer">
+            Demo Content: Quyidagi sharhlar namuna (placeholder) maqsadida kiritilgan va real mijozlar sharhlari emas.
+          </p>
+        </div>
+
+        <div class="testimonial-carousel glass-card reveal revealed" aria-roledescription="carousel" aria-label="Testimonials">
+          <div id="testimonial-slide" class="testimonial-slide" aria-live="polite"></div>
+
+          <div class="carousel-controls">
+            <button type="button" id="prev-testimonial" class="icon-btn glass-btn" aria-label="Previous testimonial">←</button>
+            <div id="testimonial-dots" class="carousel-dots" role="tablist" aria-label="Testimonial slides"></div>
+            <button type="button" id="next-testimonial" class="icon-btn glass-btn" aria-label="Next testimonial">→</button>
+          </div>
+        </div>
+
+        <div class="extras-block">
+          <div class="section-header reveal revealed">
+            <span class="section-eyebrow" data-i18n="extras.eyebrow">07 / INTERAKTIV MODULLAR</span>
+            <h2 class="section-title" data-i18n="extras.title">Dasturchi laboratoriyasi</h2>
+            <p class="section-subtitle" data-i18n="extras.subtitle">
+              Jonli kod muharriri, terminal, texnologiyalar orbitasi va boshqa qo'shimcha modullar.
+            </p>
+          </div>
+
+          <div class="extras-grid">
+            <div class="terminal-box glass-card reveal revealed">
+              <div class="window-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="window-title">terminal — muhammad@portfolio:~</span>
+              </div>
+              <div class="terminal-body" id="terminal-output">
+                <p class="term-line"><span class="term-prompt">$</span> whoami</p>
+                <p class="term-out">muhammad — frontend &amp; ui/ux developer</p>
+                <p class="term-line"><span class="term-prompt">$</span> ls projects</p>
+                <p class="term-out">uzumn111.netlify.app | bmwn111.netlify.app | samsungn111.netlify.app | braingameuzb.netlify.app</p>
+              </div>
+              <form id="terminal-form" class="terminal-input-row">
+                <label for="terminal-input" class="term-prompt">&gt;</label>
+                <input type="text" id="terminal-input" class="terminal-input" placeholder="Type: help, about, phones, projects, clear..." autocomplete="off" />
+                <button type="submit" class="btn btn-sm btn-primary">Run</button>
+              </form>
+            </div>
+
+            <div class="code-editor-box glass-card reveal revealed">
+              <div class="window-bar">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="window-title" id="code-filename">page-router.js</span>
+                <div class="code-tabs">
+                  <button type="button" class="code-tab active" data-snippet="js">JS</button>
+                  <button type="button" class="code-tab" data-snippet="css">CSS</button>
+                  <button type="button" class="code-tab" data-snippet="html">HTML</button>
+                </div>
+              </div>
+              <pre class="code-pre"><code id="code-display"></code></pre>
+              <div class="code-footer">
+                <button type="button" id="replay-code-btn" class="btn btn-sm glass-btn">↻ Replay Typing</button>
+                <button type="button" id="copy-code-btn" class="btn btn-sm glass-btn">Copy Code</button>
+              </div>
+            </div>
+
+            <div class="orbit-card glass-card reveal revealed">
+              <h3 data-i18n="extras.orbitTitle">Texnologiyalar Orbitasi</h3>
+              <p class="muted-note" data-i18n="extras.orbitDesc">Asosiy veb texnologiyalarning aylanma vizualizatsiyasi.</p>
+              <div class="orbit-stage" aria-label="Animated technology orbit">
+                <div class="orbit-core">WEB</div>
+                <div class="orbit-ring ring-a">
+                  <span class="orbit-node node-1">HTML5</span>
+                  <span class="orbit-node node-2">CSS3</span>
+                </div>
+                <div class="orbit-ring ring-b">
+                  <span class="orbit-node node-3">JS</span>
+                  <span class="orbit-node node-4">UI/UX</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="github-card glass-card reveal revealed">
+              <div class="card-top-row">
+                <h3 data-i18n="extras.ghTitle">GitHub Profil Statistikasi</h3>
+                <span class="demo-pill">SAMPLE / EDITABLE</span>
+              </div>
+              <p class="muted-note" data-i18n="extras.ghNote">
+                Haqiqiy GitHub statistikasi uchun GitHub REST API yoki o'z ma'lumotlaringizni ulang. Quyida namuna ko'rsatkichlar keltirilgan.
+              </p>
+              <div class="gh-stats-grid">
+                <div class="gh-stat">
+                  <strong id="gh-repos">18</strong>
+                  <span>Public Repos (Demo)</span>
+                </div>
+                <div class="gh-stat">
+                  <strong id="gh-stars">42</strong>
+                  <span>Stars (Demo)</span>
+                </div>
+                <div class="gh-stat">
+                  <strong id="gh-commits">320+</strong>
+                  <span>Commits (Demo)</span>
+                </div>
+              </div>
+              <div class="gh-langs">
+                <span>JavaScript</span><span>CSS3</span><span>HTML5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-newsletter-grid">
+            <div class="faq-box glass-card reveal revealed">
+              <h3 data-i18n="extras.faqTitle">Ko'p so'raladigan savollar (FAQ)</h3>
+              <div id="faq-accordion" class="faq-list"></div>
+            </div>
+
+            <div class="newsletter-box glass-card reveal revealed">
+              <h3 data-i18n="extras.newsTitle">Yangiliklarga obuna bo'lish</h3>
+              <p class="muted-note" data-i18n="extras.newsDesc">
+                Yangi loyihalar va maqolalar haqida xabardor bo'ling. (Frontend demo UI — ulanish uchun backend endpoint qo'shing).
+              </p>
+              <form id="newsletter-form" class="newsletter-form" novalidate>
+                <label for="newsletter-email" class="sr-only">Email address</label>
+                <input type="email" id="newsletter-email" class="form-input" placeholder="name@example.com" required />
+                <button type="submit" class="btn btn-primary" data-i18n="extras.newsBtn">Obuna bo'lish</button>
+              </form>
+              <div id="newsletter-status" class="form-feedback" role="status" aria-live="polite"></div>
+
+              <div class="visit-counter-box glass-subtle">
+                <div class="visit-header">
+                  <strong data-i18n="extras.visitTitle">Sahifa tashriflari hisoblagichi</strong>
+                  <span class="demo-pill">BACKEND REQUIRED</span>
+                </div>
+                <p class="muted-note" data-i18n="extras.visitDesc">
+                  Haqiqiy umumiy tashriflar sonini saqlash uchun backend API yoki ma'lumotlar bazasi talab qilinadi. Quyida lokal brauzer sessiyasi ko'rsatilgan:
+                </p>
+                <div class="visit-count-row">
+                  <span data-i18n="extras.localVisitsLabel">Mahalliy brauzer tashriflari:</span>
+                  <strong id="local-visit-count">1</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 8: CONTACT SECTION -->
+    <section id="contact" data-page-section="contact" class="section contact-section page-view hidden">
+      <div class="container">
+        <div class="section-header reveal revealed">
+          <span class="section-eyebrow" data-i18n="contact.eyebrow">08 / BOG'LANISH</span>
+          <h2 class="section-title" data-i18n="contact.title">Aloqa</h2>
+          <p class="section-subtitle" data-i18n="contact.subtitle">
+            Muhammad bilan bog'lanish — loyiha yoki hamkorlik bo'yicha xabar yuboring.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <form id="contact-form" class="contact-form glass-card reveal revealed" novalidate>
+            <div class="notice-banner" role="note" data-i18n="contact.backendNotice">
+              Eslatma: Ushbu shakl faqat mijoz tomonida tekshiradi. Xabarlarni haqiqiy yuborish uchun backend yoki email servis (masalan, Formspree / API) ulanishi kerak.
+            </div>
+
+            <div class="form-group">
+              <label for="contact-name" data-i18n="contact.labelName">Ismingiz</label>
+              <input type="text" id="contact-name" name="name" class="form-input" required minlength="2" placeholder="Ismingiz" />
+              <span class="field-error" id="err-name"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email" data-i18n="contact.labelEmail">Email manzil</label>
+              <input type="email" id="contact-email" name="email" class="form-input" required placeholder="hello@example.com" />
+              <span class="field-error" id="err-email"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject" data-i18n="contact.labelSubject">Mavzu</label>
+              <input type="text" id="contact-subject" name="subject" class="form-input" required minlength="3" placeholder="Veb-sayt yaratish" />
+              <span class="field-error" id="err-subject"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message" data-i18n="contact.labelMessage">Xabar</label>
+              <textarea id="contact-message" name="message" rows="5" class="form-input" required minlength="10" placeholder="Loyihangiz haqida qisqacha yozing..."></textarea>
+              <span class="field-error" id="err-message"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary glow-btn" data-i18n="contact.submitBtn">Xabarni tekshirish va tayyorlash</button>
+            <div id="contact-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+          </form>
+
+          <aside class="contact-info glass-card reveal revealed">
+            <h3 data-i18n="contact.directHeading">To'g'ridan-to'g'ri aloqa (Muhammad)</h3>
+            <p class="muted-note" data-i18n="contact.directText">
+              Quyidagi telefon raqamlari va havolalar orqali bog'lanishingiz mumkin:
+            </p>
+
+            <ul class="contact-channels">
+              <li>
+                <span class="channel-label">Telefon 1</span>
+                <a href="tel:+998903816676" class="channel-link" dir="ltr">+998 90 381 66 76</a>
+              </li>
+              <li>
+                <span class="channel-label">Telefon 2</span>
+                <a href="tel:+998900036609" class="channel-link" dir="ltr">+998 90 003 66 09</a>
+              </li>
+              <li>
+                <span class="channel-label">Telefon 3</span>
+                <a href="tel:+998905428080" class="channel-link" dir="ltr">+998 90 542 80 80</a>
+              </li>
+              <li>
+                <span class="channel-label">Email</span>
+                <a href="mailto:muhammad@example.com" class="channel-link">muhammad@example.com</a>
+              </li>
+              <li>
+                <span class="channel-label">Telegram</span>
+                <a href="https://t.me/username_placeholder" target="_blank" rel="noopener noreferrer" class="channel-link">@username_placeholder</a>
+              </li>
+              <li>
+                <span class="channel-label">GitHub</span>
+                <a href="https://github.com/username_placeholder" target="_blank" rel="noopener noreferrer" class="channel-link">github.com/username_placeholder</a>
+              </li>
+            </ul>
+
+            <div class="quick-actions-row">
+              <button type="button" id="open-404-btn" class="btn btn-sm glass-btn">Preview 404 Page</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOM 404 PAGE VIEW -->
+    <section id="not-found-view" data-page-section="not-found" class="section not-found-section page-view hidden" aria-label="404 Not Found">
+      <div class="container">
+        <div class="not-found-card glass-card">
+          <p class="error-code">404</p>
+          <h2 data-i18n="notFound.title">Sahifa topilmadi</h2>
+          <p data-i18n="notFound.desc">Siz izlagan sahifa mavjud emas. Bosh sahifaga qayting.</p>
+          <button type="button" id="close-404-btn" class="btn btn-primary" data-i18n="notFound.backBtn">Asosiy sahifaga qaytish</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer glass-nav">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <span class="brand-glyph">&lt;/&gt;</span>
+        <span class="brand-name">MUHAMMAD<span class="accent-text">.DEV</span></span>
+        <p class="muted-note" data-i18n="footer.tagline">30 tilli zamonaviy dasturchi portfoliyosi • Muhammad.</p>
+      </div>
+
+      <div class="footer-widgets">
+        <div class="digital-clock glass-pill" aria-live="polite">
+          <span class="clock-label" data-i18n="footer.clockLabel">Soat &amp; Sana:</span>
+          <time id="digital-clock-display">--:--:--</time>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p data-i18n="footer.copyright">© 2026 Muhammad. Barcha huquqlar himoyalangan.</p>
+      <div class="footer-links">
+        <a href="#hero" data-page="hero" data-i18n="nav.home">Bosh sahifa</a>
+        <a href="#projects" data-page="projects" data-i18n="nav.projects">Loyihalar</a>
+        <a href="#contact" data-page="contact" data-i18n="nav.contact">Aloqa</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button type="button" id="back-to-top" class="back-to-top glow-btn" aria-label="Back to top" title="Back to top">↑</button>
+
+  <!-- Project Details Modal -->
+  <div id="project-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+    <div class="modal-card glass-card">
+      <button type="button" id="pm-close" class="modal-close" aria-label="Close project modal">✕</button>
+      <div id="pm-badge" class="modal-category"></div>
+      <h3 id="pm-title" class="modal-title"></h3>
+      <div id="pm-preview" class="modal-preview"></div>
+      <p id="pm-desc" class="modal-desc"></p>
+      <div id="pm-tags" class="project-tags"></div>
+      <div class="modal-actions">
+        <a id="pm-demo" href="https://uzumn111.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo ↗</a>
+        <a id="pm-repo" href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary glass-btn">GitHub Repo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CV Preview Modal -->
+  <div id="cv-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+    <div class="modal-card glass-card cv-modal-card">
+      <button type="button" id="cv-close" class="modal-close" aria-label="Close CV modal">✕</button>
+      <h3 id="cv-modal-title" class="modal-title">Curriculum Vitae — Muhammad</h3>
+      <p class="muted-note">Editable resume details for Muhammad. Update sections as needed.</p>
+      <div class="cv-sheet">
+        <div class="cv-header">
+          <div>
+            <h4>Muhammad</h4>
+            <p>Frontend Developer &amp; UI/UX Designer • +998 90 381 66 76 | +998 90 003 66 09 | +998 90 542 80 80</p>
+          </div>
+          <button type="button" id="download-cv-txt" class="btn btn-sm btn-primary">⬇ Download CV (.txt)</button>
+        </div>
+        <div class="cv-block">
+          <h5>Live Projects</h5>
+          <p>uzumn111.netlify.app • bmwn111.netlify.app • samsungn111.netlify.app • braingameuzb.netlify.app</p>
+        </div>
+        <div class="cv-block">
+          <h5>Core Skills</h5>
+          <p>HTML5, CSS3 (Grid, Flexbox, Animations), JavaScript (ES6+), Responsive Web Design, Git &amp; GitHub, UI/UX Prototyping.</p>
+        </div>
+        <div class="cv-block">
+          <h5>Contact Numbers</h5>
+          <p>+998 90 381 66 76 • +998 90 003 66 09 • +998 90 542 80 80</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy-Friendly Cookie Notice -->
+  <div id="cookie-banner" class="cookie-banner glass-card hidden" role="region" aria-label="Cookie notice">
+    <p data-i18n="cookie.text">
+      Ushbu sayt tanlangan til, sahifa va mavzuni saqlash uchun faqat lokal brauzer xotirasidan (localStorage) foydalanadi.
+    </p>
+    <div class="cookie-actions">
+      <button type="button" id="cookie-accept" class="btn btn-sm btn-primary" data-i18n="cookie.accept">Tushundim</button>
+    </div>
+  </div>
+
+  <script src="./INDEX.JS"></script>
+</body>
+</html>
